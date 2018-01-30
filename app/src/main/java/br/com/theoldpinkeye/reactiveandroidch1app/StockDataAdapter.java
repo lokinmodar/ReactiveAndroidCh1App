@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder> {
-    private final List<String> data = new ArrayList<>();
+    private final List<StockUpdate> data = new ArrayList<>();
     @Override
     public StockUpdateViewHolder onCreateViewHolder(ViewGroup parent,
                                                     int viewType) {
@@ -23,15 +23,18 @@ public class StockDataAdapter extends RecyclerView.Adapter<StockUpdateViewHolder
         return vh;
     }
     @Override
-    public void onBindViewHolder(StockUpdateViewHolder holder, int
-            position) {
-        holder.stockSymbol.setText(data.get(position));
+    public void onBindViewHolder(StockUpdateViewHolder holder, int position) {
+        StockUpdate stockUpdate = data.get(position);
+        holder.setStockSymbol(stockUpdate.getStockSymbol());
+        holder.setPrice(stockUpdate.getPrice());
+        holder.setDate(stockUpdate.getDate());
     }
     @Override
     public int getItemCount() {
         return data.size();
     }
-    public void add(String stockSymbol) {
+
+    public void add(StockUpdate stockSymbol) {
         this.data.add(stockSymbol);
         notifyItemInserted(data.size() - 1);
     }

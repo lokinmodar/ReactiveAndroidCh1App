@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
@@ -45,10 +47,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        Observable.just("APPL", "GOOGLE", "TWTR")
-                .subscribe(new Consumer<String>() {
+        Observable.just(
+                new StockUpdate("GOOGLE", 12.43, new Date()),
+                new StockUpdate("APPL", 645.1, new Date()),
+                new StockUpdate("TWTR", 1.43, new Date()))
+                .subscribe(new Consumer<StockUpdate>() {
                     @Override
-                    public void accept(String stockSymbol) {
+                    public void accept(StockUpdate stockSymbol) {
                         stockDataAdapter.add(stockSymbol);
                     }
                 });
